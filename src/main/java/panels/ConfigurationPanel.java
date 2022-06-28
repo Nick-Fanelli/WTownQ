@@ -1,16 +1,12 @@
 package panels;
 
-import imgui.ImGui;
-
 public class ConfigurationPanel extends Panel {
 
+    public ConfigurationPanel() { super("Config"); }
+
     @Override
-    public void Process() {
-        ImGui.begin("Configuration");
+    public void OnImGuiRender() {
 
-
-
-        ImGui.end();
     }
 
 }

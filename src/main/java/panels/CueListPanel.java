@@ -4,13 +4,10 @@ import imgui.ImGui;
 
 public class CueListPanel extends Panel {
 
+    public CueListPanel() { super("Cue List"); }
+
     @Override
-    public void Process() {
-        ImGui.begin("Cue List");
+    public void OnImGuiRender() {
 
-
-
-        ImGui.end();
     }
-
 }
