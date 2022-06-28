@@ -1,16 +1,18 @@
-utils/IOUtils.java
- utils.IOUtils
-application/ConfiguredApplication.java
- application.ConfiguredApplication
-WTownQ.java
- WTownQ
-application/DockableApplication.java
- application.DockableApplication
 panels/Panel.java
  panels.Panel
 application/ProgramApplication.java
  application.ProgramApplication
-panels/ConfigurationPanel.java
- panels.ConfigurationPanel
+WTownQ.java
+ WTownQ
+application/DockableApplication.java
+ application.DockableApplication
+panels/PropertiesPanel.java
+ panels.PropertiesPanel
+panels/ControlPanel.java
+ panels.ControlPanel
 panels/CueListPanel.java
  panels.CueListPanel
+utils/IOUtils.java
+ utils.IOUtils
+application/ConfiguredApplication.java
+ application.ConfiguredApplication

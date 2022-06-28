@@ -24,7 +24,6 @@ public abstract class DockableApplication extends ConfiguredApplication {
     protected void initWindow(Configuration config) {
         super.initWindow(config);
 
-
         final long windowPtr = getHandle();
 
         int[] startingWidth = new int[1];

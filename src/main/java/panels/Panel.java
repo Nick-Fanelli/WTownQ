@@ -1,15 +1,22 @@
 package panels;
 
+import application.ConfiguredApplication;
 import imgui.ImGui;
+import imgui.flag.ImGuiWindowFlags;
 import imgui.type.ImBoolean;
 
 public abstract class Panel {
 
+    public static final int STATIC_WINDOW_FLAGS = ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoCollapse
+            | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoResize;
+
+    protected final ConfiguredApplication parentApplication;
+
     protected final String panelName;
+    protected ImBoolean isOpen = new ImBoolean(true);
 
-    private ImBoolean isOpen = new ImBoolean(true);
-
-    public Panel(String panelName) {
+    public Panel(ConfiguredApplication application, String panelName) {
+        this.parentApplication = application;
         this.panelName = panelName;
     }
 
@@ -17,9 +24,7 @@ public abstract class Panel {
         if(!isOpen.get())
             return;
 
-        ImGui.begin(panelName, isOpen);
         OnImGuiRender();
-        ImGui.end();
     }
 
     public abstract void OnImGuiRender();

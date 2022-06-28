@@ -6,10 +6,38 @@ import imgui.app.Configuration;
 import imgui.flag.ImGuiCol;
 import utils.IOUtils;
 
+import static org.lwjgl.glfw.GLFW.glfwGetWindowSize;
+import static org.lwjgl.glfw.GLFW.glfwSetWindowSizeCallback;
+
 public abstract class ConfiguredApplication extends Application {
 
     public static final String SAVE_FILE_LOCATION = "imgui.ini";
     public static final ImVec4 ACCENT_COLOR = new ImVec4(0.396078f, 0.803921f, 0.992156f, 1.0f);
+
+    private int currentWindowWidth;
+    private int currentWindowHeight;
+
+    @Override
+    protected void initWindow(Configuration config) {
+        super.initWindow(config);
+
+        final long windowPtr = getHandle();
+
+        int[] startingWidth = new int[1];
+        int[] startingHeight = new int[1];
+
+        glfwGetWindowSize(windowPtr, startingWidth, startingHeight);
+
+        currentWindowWidth = startingWidth[0];
+        currentWindowHeight = startingHeight[0];
+
+        glfwSetWindowSizeCallback(windowPtr, (final long window, final int width, final int height) -> {
+            super.runFrame(); // Mimic ImGui Behavior (because we are overriding glfw window callback)
+
+            this.currentWindowWidth = width;
+            this.currentWindowHeight = height;
+        });
+    }
 
     @Override
     protected void initImGui(Configuration config) {
@@ -26,7 +54,7 @@ public abstract class ConfiguredApplication extends Application {
         byte[] ttfBytes = IOUtils.LoadApplicationResourceAsBytes("fonts/segoe-ui.ttf");
 
         assert ttfBytes != null;
-        io.setFontDefault(io.getFonts().addFontFromMemoryTTF(ttfBytes, 18.0f));
+        io.setFontDefault(io.getFonts().addFontFromMemoryTTF(ttfBytes, 18.0f, fontConfig));
 
         SetImGuiTheme();
     }
@@ -79,5 +107,8 @@ public abstract class ConfiguredApplication extends Application {
     public void Launch() {
         launch(this);
     }
+
+    public int GetOSWindowWidth() { return this.currentWindowWidth; }
+    public int GetOSWindowHeight() { return this.currentWindowHeight; }
 
 }

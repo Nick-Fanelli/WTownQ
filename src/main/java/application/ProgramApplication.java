@@ -1,17 +1,20 @@
 package application;
 
 import imgui.app.Configuration;
-import panels.ConfigurationPanel;
+import panels.ControlPanel;
 import panels.CueListPanel;
+import panels.PropertiesPanel;
 
-public class ProgramApplication extends DockableApplication {
+public class ProgramApplication extends ConfiguredApplication {
 
     private final CueListPanel cueListPanel;
-    private final ConfigurationPanel configurationPanel;
+    private final ControlPanel controlPanel;
+    private final PropertiesPanel propertiesPanel;
 
     public ProgramApplication() {
-        cueListPanel = new CueListPanel();
-        configurationPanel = new ConfigurationPanel();
+        cueListPanel = new CueListPanel(this);
+        controlPanel = new ControlPanel(this);
+        propertiesPanel = new PropertiesPanel(this);
     }
 
     @Override
@@ -23,7 +26,8 @@ public class ProgramApplication extends DockableApplication {
     @Override
     public void process() {
         cueListPanel.Process();
-        configurationPanel.Process();
+        controlPanel.Process();
+        propertiesPanel.Process();
     }
 
 }
