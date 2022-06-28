@@ -1,4 +1,14 @@
+panels/Panel.java
+ panels.Panel
+panels/CueListPanel.java
+ panels.CueListPanel
+utils/IOUtils.java
+ utils.IOUtils
+panels/ConfigurationPanel.java
+ panels.ConfigurationPanel
 WTownQ.java
  WTownQ
-core/DockableApplication.java
- core.DockableApplication
+application/DockableApplication.java
+ application.DockableApplication
+application/ConfiguredApplication.java
+ application.ConfiguredApplication

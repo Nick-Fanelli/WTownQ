@@ -1,24 +1,24 @@
-package core;
+package application;
 
 import imgui.ImGui;
 import imgui.app.Application;
 import imgui.app.Configuration;
-import imgui.flag.ImGuiCond;
-import imgui.flag.ImGuiConfigFlags;
-import imgui.flag.ImGuiStyleVar;
-import imgui.flag.ImGuiWindowFlags;
+import imgui.flag.*;
 import imgui.type.ImBoolean;
 
 import static org.lwjgl.glfw.GLFW.glfwGetWindowSize;
 import static org.lwjgl.glfw.GLFW.glfwSetWindowSizeCallback;
 
-public abstract class DockableApplication extends Application {
+public abstract class DockableApplication extends ConfiguredApplication {
 
     private int currentWindowWidth;
     private int currentWindowHeight;
 
     private static final int DOCKSPACE_IMGUI_WINDOW_FLAGS = ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoCollapse
-            | ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoBringToFrontOnFocus | ImGuiWindowFlags.NoNavFocus;
+            | ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoBringToFrontOnFocus | ImGuiWindowFlags.NoNavFocus
+            | ImGuiWindowFlags.None;
+
+    private static final int IMGUI_DOCKING_FLAGS = ImGuiDockNodeFlags.None;
 
     @Override
     protected void initWindow(Configuration config) {
@@ -59,14 +59,20 @@ public abstract class DockableApplication extends Application {
 
         ImGui.pushStyleVar(ImGuiStyleVar.WindowRounding, 0.0f);
         ImGui.pushStyleVar(ImGuiStyleVar.WindowBorderSize, 0.0f);
+        ImGui.pushStyleVar(ImGuiStyleVar.WindowPadding, 0.0f, 0.0f);
 
         ImGui.begin("Dockspace", new ImBoolean(true), DOCKSPACE_IMGUI_WINDOW_FLAGS);
-        ImGui.popStyleVar(2);
+
+        ImGui.popStyleVar(3);
+
+        int dockspaceID = ImGui.getID("Dockspace");
+        ImGui.dockSpace(dockspaceID, 0.0f, 0.0f, IMGUI_DOCKING_FLAGS);
+
+        ImGui.end();
     }
 
     @Override
     protected void postProcess() {
-        ImGui.end();
 
         super.postProcess();
     }
