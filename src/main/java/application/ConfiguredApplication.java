@@ -8,8 +8,8 @@ import utils.IOUtils;
 
 public abstract class ConfiguredApplication extends Application {
 
+    public static final String SAVE_FILE_LOCATION = "imgui.ini";
     public static final ImVec4 ACCENT_COLOR = new ImVec4(0.396078f, 0.803921f, 0.992156f, 1.0f);
-
 
     @Override
     protected void initImGui(Configuration config) {
@@ -20,6 +20,8 @@ public abstract class ConfiguredApplication extends Application {
         ImFontConfig fontConfig = new ImFontConfig();
         fontConfig.setOversampleH(3);
         fontConfig.setOversampleV(3);
+
+        ImGui.loadIniSettingsFromDisk(SAVE_FILE_LOCATION);
 
         byte[] ttfBytes = IOUtils.LoadApplicationResourceAsBytes("fonts/segoe-ui.ttf");
 
@@ -33,6 +35,7 @@ public abstract class ConfiguredApplication extends Application {
     @Override
     protected void disposeImGui() {
 //        super.disposeImGui();
+        ImGui.saveIniSettingsToDisk(SAVE_FILE_LOCATION);
     }
 
     private void SetImGuiTheme() {
@@ -71,6 +74,10 @@ public abstract class ConfiguredApplication extends Application {
         style.setColor(ImGuiCol.TitleBg, 0.15f, 0.1505f, 0.151f, 1.0f);
         style.setColor(ImGuiCol.TitleBgActive, 0.15f, 0.1505f, 0.151f, 1.0f);
         style.setColor(ImGuiCol.TitleBgCollapsed, 0.15f, 0.1505f, 0.151f, 1.0f);
-
     }
+
+    public void Launch() {
+        launch(this);
+    }
+
 }
