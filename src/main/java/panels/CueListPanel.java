@@ -60,7 +60,7 @@ public class CueListPanel extends Panel {
                 // Draw Cue Number
                 ImGui.tableSetColumnIndex(0);
 
-                if(ImGui.selectable(DECIMAL_FORMAT.format(cueNumber), selectedCues.contains(cueNumber), ImGuiSelectableFlags.SpanAllColumns)) {
+                if(ImGui.selectable(DECIMAL_FORMAT.format(cueNumber), selectedCues.contains(cueNumber), ImGuiSelectableFlags.SpanAllColumns | ImGuiSelectableFlags.AllowItemOverlap)) {
 
                     // TODO: Mac support for super + shift func.
                     if(!ImGui.getIO().getKeyCtrl())
@@ -84,12 +84,14 @@ public class CueListPanel extends Panel {
 
     private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.###");
 
+    private float[] floatValue = { 1.0f };
+
     private void RenderCue(float cueNumber, CueData cueData) {
         ImGui.tableSetColumnIndex(1);
         ImGui.text(cueData.cueLabel);
 
         ImGui.tableSetColumnIndex(2);
-        ImGui.text("Test");
+        ImGui.dragFloat("", floatValue);
 
         ImGui.tableSetColumnIndex(3);
         ImGui.text("test");
