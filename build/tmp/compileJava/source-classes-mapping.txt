@@ -1,3 +1,5 @@
+cue/CueData.java
+ cue.CueData
 panels/Panel.java
  panels.Panel
 application/ProgramApplication.java
@@ -8,6 +10,8 @@ application/DockableApplication.java
  application.DockableApplication
 panels/PropertiesPanel.java
  panels.PropertiesPanel
+cue/CueList.java
+ cue.CueList
 panels/ControlPanel.java
  panels.ControlPanel
 panels/CueListPanel.java
